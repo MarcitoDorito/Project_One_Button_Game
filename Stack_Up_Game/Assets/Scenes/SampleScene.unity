@@ -298,6 +298,7 @@ MonoBehaviour:
   snapLayer:
     serializedVersion: 2
     m_Bits: 64
+  cubePrefab: {fileID: 3524694723464560419, guid: 2f0d340ace2d9b8418ff1c03cabf317e, type: 3}
   blockSpeed: 2
 --- !u!212 &1501781828
 SpriteRenderer:
@@ -360,7 +361,7 @@ Transform:
   m_GameObject: {fileID: 1501781826}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.2000003, y: -3.6000001, z: 0}
+  m_LocalPosition: {x: -6.9, y: -3.6000001, z: 0}
   m_LocalScale: {x: 6.9171, y: 0.8797, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490,7 +491,7 @@ Transform:
   m_GameObject: {fileID: 1952745896}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -4.5, z: 0}
+  m_LocalPosition: {x: 0, y: -4.5, z: 0}
   m_LocalScale: {x: 6.9171, y: 0.8797, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
