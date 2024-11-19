@@ -9,7 +9,7 @@ public class BlockMovement : MonoBehaviour
 
     private float blockSpeed = 2.0f;
 
-    private float speedUp = 0.5f;
+    private float speedUp = 0.25f;
 
     public int speedUpCounter = 0;
 
@@ -45,10 +45,11 @@ public class BlockMovement : MonoBehaviour
         //if (isPlacedOnX)
         //{
         tower.theTower[tower.towerIndex].transform.localPosition = new Vector2(Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE, tower.scoreCount);
+    }
         //}
         //else
         //{
         //    tower.theTower[tower.towerIndex].transform.localPosition = new Vector3(0, Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE, tower.secondaryPosition);
         //}
-    }
+    
 }

@@ -9,6 +9,8 @@ public class TowerScript : MonoBehaviour
 
     public CutBlockScript cutBlockScript;
 
+    public BlockColorManager blockColorManager;
+
     public const float BLOCK_SIZE = 7.0f;
 
     private const float TOWER_MOVE_SPEED = 5.0f;
@@ -50,7 +52,7 @@ public class TowerScript : MonoBehaviour
         {
             if (PlaceBlock())
             {
-            InstatiateBlock();
+                InstantiateBlock();
             scoreCount++;   
             Debug.Log(scoreCount);
             }
@@ -61,9 +63,10 @@ public class TowerScript : MonoBehaviour
         }
             blockMovement.MoveBlock();
 
+
         transform.position = Vector3.Lerp(transform.position, towerPosition, TOWER_MOVE_SPEED * Time.deltaTime);
     }
-    private void InstatiateBlock()
+    private void InstantiateBlock()
     {
         lastBlockPlacement = theTower[towerIndex].transform.localPosition;
         towerIndex--;
