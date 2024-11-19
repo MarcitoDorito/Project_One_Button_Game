@@ -34,7 +34,7 @@ public class BlockMovement : MonoBehaviour
 
     }
 
-    public void moveBlock()
+    public void MoveBlock()
     {
 
         if (tower.isGameOver)

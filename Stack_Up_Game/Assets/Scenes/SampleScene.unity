@@ -1312,6 +1312,7 @@ GameObject:
   - component: {fileID: 2098586274}
   - component: {fileID: 2098586275}
   - component: {fileID: 2098586276}
+  - component: {fileID: 2098586277}
   m_Layer: 0
   m_Name: The tower
   m_TagString: Untagged
@@ -1355,6 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockMovement: {fileID: 2098586276}
+  cutBlockScript: {fileID: 2098586277}
   theTower: []
   towerIndex: 0
   scoreCount: 0
@@ -1373,6 +1375,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 2098586275}
+  speedUpCounter: 0
+--- !u!114 &2098586277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098586273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0163cc3263832745859db85a0e95b41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rubblePrefab: {fileID: 3524694723464560419, guid: 2f0d340ace2d9b8418ff1c03cabf317e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

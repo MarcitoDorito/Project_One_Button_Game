@@ -7,6 +7,8 @@ public class TowerScript : MonoBehaviour
 {
     public BlockMovement blockMovement;
 
+    public CutBlockScript cutBlockScript;
+
     public const float BLOCK_SIZE = 7.0f;
 
     private const float TOWER_MOVE_SPEED = 5.0f;
@@ -46,9 +48,9 @@ public class TowerScript : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (placeBlock())
+            if (PlaceBlock())
             {
-            instatiateBlock();
+            InstatiateBlock();
             scoreCount++;   
             Debug.Log(scoreCount);
             }
@@ -57,11 +59,11 @@ public class TowerScript : MonoBehaviour
                 EndGame();
             }
         }
-            blockMovement.moveBlock();
+            blockMovement.MoveBlock();
 
         transform.position = Vector3.Lerp(transform.position, towerPosition, TOWER_MOVE_SPEED * Time.deltaTime);
     }
-    private void instatiateBlock()
+    private void InstatiateBlock()
     {
         lastBlockPlacement = theTower[towerIndex].transform.localPosition;
         towerIndex--;
@@ -75,7 +77,7 @@ public class TowerScript : MonoBehaviour
     }
 
 
-    private bool placeBlock()
+    private bool PlaceBlock()
     {
         Transform t = theTower[towerIndex].transform;
         blockMovement.speedUpCounter++;
@@ -91,6 +93,12 @@ public class TowerScript : MonoBehaviour
             }
             float middle = (lastBlockPlacement.x + t.localPosition.x) /2;
             t.localScale = new Vector3(towerBounds.x, 1, towerBounds.y);
+
+            Vector2 cutPosition = new Vector3(t.position.x + (t.localScale.x / 2) * Mathf.Sign(deltaX), t.position.y);
+            Vector2 cutScale = new Vector3(Mathf.Abs(deltaX), t.localScale.y);
+
+            cutBlockScript.CutBlock(cutPosition, cutScale);
+
             t.localPosition = new Vector3(middle, scoreCount, lastBlockPlacement.z);
             /*            t.localPosition = new Vector3(middle - (lastBlockPlacement.x/2),scoreCount, lastBlockPlacement.z);*/
         }
