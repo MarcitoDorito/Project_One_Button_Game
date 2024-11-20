@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class CutBlockScript : MonoBehaviour
 {
+    public TowerScript towerScript;
+    public BlockMovement blockMovement;
     public GameObject rubblePrefab;
+    public BlockColorManager blockColorManager;
+
+    private Color blockColor;
+
+
+
+    public float newDirection = 0f;
     // Start is called before the first frame update
+
     void Start()
     {
         rubblePrefab.GetComponent<Rigidbody2D>();
@@ -14,31 +24,45 @@ public class CutBlockScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (blockMovement.newCurrentPosition < 0)
+        {
+            newDirection = -1f;
+        }
+        else if (blockMovement.newCurrentPosition > 0)
+        {
+            newDirection = 1f;
+        }
     }
 
-    //public void CutBlock(Vector3 pos, Vector3 scale)
-    //{
-    //    GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-    //    go.transform.localPosition = pos;
-    //    transform.localScale = scale;
-    //    go.AddComponent<Rigidbody>();
-    //}
+    public void setBlockColor(Color color)
+    {
+        blockColor = color;
+    }
 
     public void CutBlock(Vector2 pos, Vector2 scale)
     {
-        float direction = Random.Range(0, 2) == 0 ? -1f : 1f;
-        Vector2 force = new Vector2(200f * direction, 0f);
+            /*float direction = Mathf.Sign(blockMovement.blockSpeed);*/ /*= Random.Range(0, 2) == 0 ? -1f : 1f;*/
+        Vector2 force = new Vector2(300f * newDirection, 0f);
         if (rubblePrefab != null)
         {
             GameObject rubble = Instantiate(rubblePrefab, pos, Quaternion.identity);
             rubble.transform.localScale = scale;
-            //rubble.AddComponent<Rigidbody>();
-            rubble.GetComponent<Rigidbody2D>().AddForce(new Vector2(force.x /*Random.Range(-200, 200)*/, Random.Range(100, 400)));
+            rubble.GetComponent<Rigidbody2D>().AddForce(new Vector2(force.x, Random.Range(-200, 200)));
             if (rubble.gameObject)
             {
                 Destroy(rubble.gameObject, 2f);
             }
+            SpriteRenderer spriteRenderer = rubble.GetComponent<SpriteRenderer>();
+
+            if (spriteRenderer != null)
+            {
+                blockColorManager.ChangeBlockColor(spriteRenderer, blockColor);
+            }
+            else
+            {
+                Debug.LogError("SpriteRenderer is null");
+            }
+
         }
         else
         {

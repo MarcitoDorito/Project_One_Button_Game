@@ -43,6 +43,8 @@ public class TowerScript : MonoBehaviour
             theTower[i] = transform.GetChild(i).gameObject;
         }
         towerIndex = transform.childCount -1;
+
+        Color();
     }
 
     // Update is called once per frame
@@ -67,7 +69,7 @@ public class TowerScript : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, towerPosition, TOWER_MOVE_SPEED * Time.deltaTime);
     }
     private void InstantiateBlock()
-    {
+    {   
         lastBlockPlacement = theTower[towerIndex].transform.localPosition;
         towerIndex--;
         if (towerIndex < 0)
@@ -77,6 +79,21 @@ public class TowerScript : MonoBehaviour
         towerPosition = Vector2.down * scoreCount;
         theTower[towerIndex].transform.localPosition = new Vector2(0, scoreCount);
         theTower[towerIndex].transform.localScale = new Vector3(towerBounds.x, 1, towerBounds.y);
+
+
+        Color();
+/*        SpriteRenderer spriteRenderer = theTower[towerIndex].GetComponent<SpriteRenderer>();
+
+        if(spriteRenderer != null)
+        {
+            Color randomColor = new Color(Random.value, Random.value, Random.value);
+            blockColorManager.ChangeBlockColor(spriteRenderer, randomColor);
+            cutBlockScript.setBlockColor(randomColor);
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer is null");
+        }*/
     }
 
 
@@ -114,10 +131,34 @@ public class TowerScript : MonoBehaviour
         return true;
     }
 
+    //can you wright a function that will change the color of the block
+
+
+    /*   public void ChangeBlockColor(SpriteRenderer spriteRenderer, Color color)
+        {
+            spriteRenderer.color = color;
+        }*/
+
     private void EndGame()
     {
         Debug.Log("Game Over");
         theTower[towerIndex].AddComponent<Rigidbody2D>();
         isGameOver = true;
+    }
+
+    public void Color()
+    {
+        SpriteRenderer spriteRenderer = theTower[towerIndex].GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer != null)
+        {
+            Color randomColor = new Color(Random.value, Random.value, Random.value);
+            blockColorManager.ChangeBlockColor(spriteRenderer, randomColor);
+            cutBlockScript.setBlockColor(randomColor);
+        }
+        else
+        {
+            Debug.LogError("SpriteRenderer is null");
+        }
     }
 }

@@ -7,11 +7,15 @@ public class BlockMovement : MonoBehaviour
     public TowerScript tower;
     private float blockTransition = 0.0f;
 
-    private float blockSpeed = 2.0f;
+    public float blockSpeed = 2.0f;
 
     private float speedUp = 0.25f;
 
     public int speedUpCounter = 0;
+
+    public float currentPosition;
+
+    public float newCurrentPosition = 0.0f;
 
     //public bool isPlacedOnX = true;
     // Start is called before the first frame update
@@ -36,15 +40,16 @@ public class BlockMovement : MonoBehaviour
 
     public void MoveBlock()
     {
-
+        currentPosition = Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE;
+        newCurrentPosition = currentPosition;
+        blockTransition += Time.deltaTime * blockSpeed;
         if (tower.isGameOver)
         {
             return;
         }
-        blockTransition += Time.deltaTime * blockSpeed;
         //if (isPlacedOnX)
         //{
-        tower.theTower[tower.towerIndex].transform.localPosition = new Vector2(Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE, tower.scoreCount);
+        tower.theTower[tower.towerIndex].transform.localPosition = new Vector2(currentPosition, tower.scoreCount);
     }
         //}
         //else
