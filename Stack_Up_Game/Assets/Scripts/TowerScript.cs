@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TowerScript : MonoBehaviour
 {
@@ -141,9 +142,16 @@ public class TowerScript : MonoBehaviour
 
     private void EndGame()
     {
+        float waitTime = 2f;
         Debug.Log("Game Over");
         theTower[towerIndex].AddComponent<Rigidbody2D>();
         isGameOver = true;
+        StartCoroutine(EndGame(waitTime));
+        IEnumerator EndGame(float wait)
+        {
+            yield return new WaitForSeconds(wait);
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void Color()
