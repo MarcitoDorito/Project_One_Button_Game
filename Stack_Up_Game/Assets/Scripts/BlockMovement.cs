@@ -49,7 +49,7 @@ public class BlockMovement : MonoBehaviour
         }
         //if (isPlacedOnX)
         //{
-        tower.theTower[tower.towerIndex].transform.localPosition = new Vector2(currentPosition, tower.scoreCount);
+        tower.theTower[tower.towerIndex].transform.localPosition = new Vector2(currentPosition, tower.counter);
     }
         //}
         //else

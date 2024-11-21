@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class TowerScript : MonoBehaviour
 {
+    public UI_Script uiScript;
+
     public BlockMovement blockMovement;
 
     public CutBlockScript cutBlockScript;
@@ -23,6 +26,8 @@ public class TowerScript : MonoBehaviour
 
     public int towerIndex;
 
+    public int counter = 0;
+
     public int scoreCount = 0;
 
     private int comboCount = 0;
@@ -35,6 +40,9 @@ public class TowerScript : MonoBehaviour
 
     public bool isGameOver = false;
 
+    [SerializeField]
+    private Color startColor = Color.white;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -45,7 +53,9 @@ public class TowerScript : MonoBehaviour
         }
         towerIndex = transform.childCount -1;
 
-        Color();
+        startColor = new Color(Random.Range(0.2f, 0.8f), Random.Range(0.2f, 0.8f), Random.Range(0.2f, 0.8f));
+
+        ColorChange();
     }
 
     // Update is called once per frame
@@ -56,8 +66,8 @@ public class TowerScript : MonoBehaviour
             if (PlaceBlock())
             {
                 InstantiateBlock();
-            scoreCount++;   
-            Debug.Log(scoreCount);
+            counter++;   
+            Debug.Log(counter);
             }
             else
             {
@@ -77,12 +87,12 @@ public class TowerScript : MonoBehaviour
         {
             towerIndex = transform.childCount - 1;
         }
-        towerPosition = Vector2.down * scoreCount;
-        theTower[towerIndex].transform.localPosition = new Vector2(0, scoreCount);
+        towerPosition = Vector2.down * counter;
+        theTower[towerIndex].transform.localPosition = new Vector2(0, counter);
         theTower[towerIndex].transform.localScale = new Vector3(towerBounds.x, 1, towerBounds.y);
 
 
-        Color();
+        ColorChange();
 /*        SpriteRenderer spriteRenderer = theTower[towerIndex].GetComponent<SpriteRenderer>();
 
         if(spriteRenderer != null)
@@ -120,13 +130,17 @@ public class TowerScript : MonoBehaviour
 
             cutBlockScript.CutBlock(cutPosition, cutScale);
 
-            t.localPosition = new Vector3(middle, scoreCount, lastBlockPlacement.z);
+            t.localPosition = new Vector3(middle, counter, lastBlockPlacement.z);
             /*            t.localPosition = new Vector3(middle - (lastBlockPlacement.x/2),scoreCount, lastBlockPlacement.z);*/
+            int decentStack = 1;
+            uiScript.IncreaseScore(decentStack);
         }
         else
         {
             comboCount++;
-            t.localPosition = new Vector3(lastBlockPlacement.x, scoreCount, lastBlockPlacement.z);
+            t.localPosition = new Vector3(lastBlockPlacement.x, counter, lastBlockPlacement.z);
+            int perfectStack = 2;
+            uiScript.IncreaseScore(perfectStack);
             
         }
         return true;
@@ -154,13 +168,13 @@ public class TowerScript : MonoBehaviour
         }
     }
 
-    public void Color()
+    public void ColorChange()
     {
         SpriteRenderer spriteRenderer = theTower[towerIndex].GetComponent<SpriteRenderer>();
 
         if (spriteRenderer != null)
         {
-            Color randomColor = new Color(Random.value, Random.value, Random.value);
+            Color randomColor = new Color(startColor.r + Random.Range(-0.05f,0.05f), startColor.g + Random.Range(-0.05f, 0.05f), startColor.b + Random.Range(-0.05f, 0.05f));
             blockColorManager.ChangeBlockColor(spriteRenderer, randomColor);
             cutBlockScript.setBlockColor(randomColor);
         }
