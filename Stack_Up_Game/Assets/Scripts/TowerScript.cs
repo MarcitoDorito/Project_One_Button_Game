@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class TowerScript : MonoBehaviour
 {
@@ -40,6 +39,10 @@ public class TowerScript : MonoBehaviour
 
     public bool isGameOver = false;
 
+    public KeyCode placeBlockKey = KeyCode.Space;
+
+    public KeyCode Click = KeyCode.Mouse0;
+
     [SerializeField]
     private Color startColor = Color.white;
 
@@ -61,7 +64,7 @@ public class TowerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(placeBlockKey) || Input.GetKeyDown(Click))
         {
             if (PlaceBlock())
             {
