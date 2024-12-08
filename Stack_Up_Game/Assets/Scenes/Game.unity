@@ -666,6 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 824931885}
   score: 0
+  endScore: 0
 --- !u!1 &634720178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,7 +1710,6 @@ GameObject:
   - component: {fileID: 2098586278}
   - component: {fileID: 2098586279}
   - component: {fileID: 2098586280}
-  - component: {fileID: 2098586281}
   m_Layer: 0
   m_Name: The tower
   m_TagString: Untagged
@@ -1762,6 +1762,9 @@ MonoBehaviour:
   scoreCount: 0
   secondaryPosition: 0
   isGameOver: 0
+  placeBlockKey: 32
+  Click: 323
+  startColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &2098586278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,23 +1807,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 2098586275}
-  blockSpeed: 2
+  maxBlockSpeed: 30
+  blockSpeed: 10
   speedUpCounter: 0
   currentPosition: 0
   newCurrentPosition: 0
---- !u!114 &2098586281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2098586273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588672ad4d25b5f4ea8cbc428ab9eb2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

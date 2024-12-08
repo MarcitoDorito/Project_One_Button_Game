@@ -14,14 +14,16 @@ public class TowerScript : MonoBehaviour
 
     public BlockColorManager blockColorManager;
 
-    public const float BLOCK_SIZE = 7.0f;
+    public const float BLOCK_SIZE = 20.0f;
+
+    public const float TOWER_SIZE = 7.0f;
 
     private const float TOWER_MOVE_SPEED = 5.0f;
 
     private const float ERROR_MARGIN = 0.1f;
 
     public GameObject[] theTower;
-    private Vector2 towerBounds = new Vector2(BLOCK_SIZE,0);
+    private Vector2 towerBounds = new Vector2(TOWER_SIZE,0);
 
     public int towerIndex;
 
@@ -114,7 +116,10 @@ public class TowerScript : MonoBehaviour
     private bool PlaceBlock()
     {
         Transform t = theTower[towerIndex].transform;
+        if(blockMovement.blockSpeed < blockMovement.maxBlockSpeed)
+        {
         blockMovement.speedUpCounter++;
+        }
 
         float deltaX = t.localPosition.x - lastBlockPlacement.x;
         if (Mathf.Abs(deltaX) > ERROR_MARGIN)

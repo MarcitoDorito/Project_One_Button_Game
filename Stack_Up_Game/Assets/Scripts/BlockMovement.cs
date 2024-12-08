@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BlockMovement : MonoBehaviour
@@ -7,9 +8,11 @@ public class BlockMovement : MonoBehaviour
     public TowerScript tower;
     private float blockTransition = 0.0f;
 
-    public float blockSpeed = 2.0f;
+    public float maxBlockSpeed = 20.0f;
 
-    private float speedUp = 0.25f;
+    public float blockSpeed = 10.0f;
+
+    private float speedUp = 2f;
 
     public int speedUpCounter = 0;
 
@@ -27,7 +30,7 @@ public class BlockMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (speedUpCounter == 6) 
+        if (speedUpCounter == 5 && blockSpeed < maxBlockSpeed) 
         {
             blockSpeed += speedUp;
 
@@ -40,7 +43,8 @@ public class BlockMovement : MonoBehaviour
 
     public void MoveBlock()
     {
-        currentPosition = Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE;
+        currentPosition = Mathf.PingPong(blockTransition, TowerScript.BLOCK_SIZE) - (TowerScript.BLOCK_SIZE/2);
+        /*currentPosition = Mathf.Sin(blockTransition) * TowerScript.BLOCK_SIZE;*/
         newCurrentPosition = currentPosition;
         blockTransition += Time.deltaTime * blockSpeed;
         if (tower.isGameOver)
